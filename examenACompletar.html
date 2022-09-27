@@ -22,26 +22,22 @@
   </table>
   <script type="text/javascript">
 
-      let tamano = parseFloat(getComputedStyle(document.body).fontSize); // Tamano inicial
-      //let tamano = document.getElementById("parrafo").style.fontSize;// TamaNo inicial
+      let parrafo = document.getElementById("parrafo");
+      let tamano=100;
 
-      //Use el comentado pero me devuelve una cadena vacia por no estar definido el tamaño en css
-      //el que he dejado tambien hace una cosa rara (la primera pulsacion pone el tamaño mas pequeño y luego ya si aumenta)
-      //pero es menos raro que lo que hace el anterior
-      
       function aumenta(){        
         tamano+=25;
-        document.getElementById("parrafo").style.fontSize = tamano+"%"; // aumentamos un 25% el tamaño
+        parrafo.style.fontSize = tamano+"%"; // aumentamos un 25% el tamaño
       }
       function disminuye(){
         tamano-=25;
-        document.getElementById("parrafo").style.fontSize = tamano+"%"; //decrementamos un 25% el tamaño
+        parrafo.style.fontSize = tamano+"%"; //decrementamos un 25% el tamaño
       }
       function cambiarColor(){
-        document.getElementById("parrafo").style.color = document.getElementById("color").value; //Cambiamos el color del parrafo
+        parrafo.style.color = document.getElementById("color").value; //Cambiamos el color del parrafo
       }
       function cambiarFuente(font) {
-        document.getElementById("parrafo").style.fontFamily = font.value; // Cambiamos la fuente del parrafo
+        parrafo.style.fontFamily = font.value; // Cambiamos la fuente del parrafo
       }
 
   </script>
