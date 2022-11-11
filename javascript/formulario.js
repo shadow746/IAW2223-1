@@ -1,27 +1,54 @@
 function ValidarFormulario()
 {
-    let entradas = document.getElementsByTagName("input");
-    let i,fin,id;
-    let correcto = 1;
-    fin= entradas.length;
-    
-    for (i=0;fin;i++)
-    {
-        if (entradas[i]=="")
-        {
-            id = "error"+i;
-            document.getElementById(id).innerHTML = "Este campo es obligatorio";
-            correcto = 0; 
-        } else if (i==7)
-        {
-            correcto = VerificarDni(entradas[i],i);
+    document.getElementById("resultado").innerHTML ="";
+    //let entradas = document.getElementsByTagName("input");
+    let entradas = [];    
+    let correctopass = 1;
+    let correctodni=1;
+    let correcto=1;
+    let correctomail=1;
+    let i,id,longitud;
 
-        } else if (i==8)
-        {
-            correcto = VerificarPassword (entradas[i],entradas[i+1],i);
+    for (i=0;i<9; i++)
+    {
+        if (i<3 || i>5)
+            {
+                document.getElementById("error"+i).innerHTML = " ";
+            }
+    }
+
+    for (i=0; i<9; i++)
+    {
+        entradas.push(document.getElementById("dato"+i).value);
+    }
+
+    longitud = entradas.length-1;
+    
+    for (i=0; i<longitud; i++)
+    {
+        if (i<3 || 5<i)
+        {     
+            if (entradas[i]== "")
+            {
+                id = "error"+i;
+                document.getElementById(id).innerHTML = "Este campo es obligatorio";
+                correcto = 0; 
+
+            }else if (i==2)
+            {
+                correctomail=VerificarMail(entradas[i],i);
+
+            }else if (i==6)
+            {
+                correctodni = VerificarDni(entradas[i],i);
+
+            } else if (i==7)
+            {
+                correctopass = VerificarPassword (entradas[i],entradas[i+1],i);
+            }
         }
     }
-    if (correcto == 1)
+    if (correctodni == 1 && correctopass==1 && correcto==1 && correctomail==1)
     {
         document.getElementById("resultado").innerHTML = "El formulario es correcto";
     }
@@ -35,6 +62,9 @@ function VerificarPassword (pass1,pass2,i)
         let tamano2 = pass2.length;
         let item1 = "error"+i;
         let item2 = "error"+(i+1);
+
+        document.getElementById(item1).innerHTML = "";
+            document.getElementById(item2).innerHTML = "";
 
         if(pass1!=pass2)
         {
@@ -60,11 +90,13 @@ function VerificarPassword (pass1,pass2,i)
 function VerificarDni(dni,i)
 {
     let longitud = dni.length;
-    let valores = /^[0-9]+$/;
+    let valores = /^[0-9a-zA-Z]+$/;
     let correcto = 1;
     let letras = "TRWAGMYFPDXBNJZSQVHLCKE";
     let letra,letracalc, item;
     item = "error"+i;
+
+    document.getElementById(item).innerHTML ="";
 
     if (longitud!=9)
     {
@@ -74,7 +106,8 @@ function VerificarDni(dni,i)
     }else
     {
         letracalc = letras [parseInt(dni)%23];
-        letra = dni(8);
+        letra = dni[8];
+        letra = letra.toUpperCase();
         if(letra != letracalc)
         {
             correcto = 0;
@@ -82,4 +115,16 @@ function VerificarDni(dni,i)
         }
     }
     return(correcto);
+}
+
+function VerificarMail(entrada,i)
+{
+    let correo = /^[0-9a-zA-Z]+@+[a-zA-z]+[.]+[a-zA-Z]+$/;
+    let correcto = 1;
+    if (!correo.test(entrada))
+    {
+        correcto=0;
+        document.getElementById("error"+i).innerHTML = "El mail no es correcto" 
+    }
+    return (correcto);
 }
