@@ -54,7 +54,7 @@ function VerificarPassword (pass1,pass2,i)
             document.getElementById(item2).innerHTML = "solo números y letras";
             correcto=0;
         }
-        return correcto;
+        return (correcto);
 }
 
 function VerificarDni(dni,i)
@@ -81,4 +81,5 @@ function VerificarDni(dni,i)
             document.getElementById(item).innerHTML = "El DNI introducido no es válido";
         }
     }
+    return(correcto);
 }
