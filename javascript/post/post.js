@@ -23,7 +23,8 @@ function imprimir(listapost)
       //newdiv.id = "div"+i;
       newboton = document.createElement("button");
       newboton.id = i;
-      newboton.onclick = "borrarpost(listapost,this.id)";
+      newboton.innerHTML="Borrar";
+      newboton.setAttribute("onclick","borrarpost(listapost,this.id)");
       newdiv.append(newboton); 
     document.getElementById("posteos").append(newdiv);
   }
