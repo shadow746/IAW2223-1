@@ -24,16 +24,15 @@ function imprimir(listapost)
       newboton = document.createElement("button");
       newboton.id=i;
       newdiv.append(newboton);
-      newboton.onclick = "borrarpost(listapost,this)";
+      newboton.onclick = "borrarpost(listapost,this.id)";
       newboton.innerHTML = "Borrar"; 
     document.getElementById("posteos").append(newdiv);
   }
 }
 
-function borrarpost(listapost,boton)
+function borrarpost(listapost,i)
 {
-  let id = boton.id;
-  listapost.splice(id,1);
+  listapost.splice(i,1);
   imprimir(listapost);
   
 }
