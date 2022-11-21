@@ -16,8 +16,12 @@
             border-radius: 10px;
         }
     </style>
-    <!-- Incluye aquí jQuery -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+            <script src="jquery.js"></script>
 </head>
+<!--Realiza una página web con una lista de enlaces. Utiliza jQuery para adicionar a
+todos y cada uno de los enlaces la imagen de un icono de descarga tomada de
+iconarchive.com.-->
 <body>
     <h1>Las funciones each y append en jQuery</h1>
     <ul>
@@ -30,7 +34,9 @@
     </ul>
 
     <script>
-        /* Rellena aquí el código jQuery */
+    $(document).ready(function () {
+        $("a").attr("href","iconDescarga.png");
+    });
      </script>
 </body>
 </html>

@@ -19,8 +19,9 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 </head>
-<!--Ilustra el funcionamiento del método empty() de jQuery presentando una caja que
-contenga un texto centrado y que mediante un botón vacíe de contenido el mismo.-->
+<!--Modifica ligeramente el ejercicio anterior para que en lugar de vaciar literalmente el
+div simplemente visualice o no el texto en función de un botón, “Mostrar/Ocultar
+texto”. Utiliza algunas de las funciones de clases que tiene jQuery.-->
 <body>
     <h1>El método empty() de jQuery</h1>
     <div>
@@ -31,7 +32,9 @@ contenga un texto centrado y que mediante un botón vacíe de contenido el mismo
        $(document).ready(function () {
         $("button").click(function (e) { 
             e.preventDefault();
-            $("div").empty();
+            let texto=$("div").text();
+            (texto !="") ?  $("div").empty() : $("div").text("texto de nuevo");
+                        
         });
        });
     </script>
