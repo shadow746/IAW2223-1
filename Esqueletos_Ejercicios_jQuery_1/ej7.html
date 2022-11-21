@@ -16,7 +16,9 @@
             border-radius: 10px;
         }
     </style>
-<!-- Incluye jQuery -->    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="jquery.js"></script>
+    <script src="ej7.js"></script>  
 </head>
 <body>
     <h1>Función existe</h1>
@@ -33,8 +35,8 @@
             "></ipsa>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Distinctio corrupti commodi temporibus vitae tempora accusamus, <a href="">illo perferendis eveniet</a> aliquam praesentium molestias quidem atque animi nisi adipisci quasi voluptates ad porro.</p>
             <img src="https://picsum.photos/200/200" alt="">
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error eaque sit nemo! Voluptatem expedita hic ipsam minima eligendi id, labore non veritatis <a href="">atque amet ipsum mollitia</a>  dignissimos? Mollitia, fuga ea!</p>
-    <script>
-        /* Rellena aquí con el código jQuery */
-      </script>
+            <script>
+                console.log($("p").existe() ? "Existe" : "No Existe");
+            </script>
 </body>
 </html>

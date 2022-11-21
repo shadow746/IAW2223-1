@@ -1,9 +1,13 @@
 /* Rellena este fichero */
 $(document).ready(function () {
-    $("#btn_ocultar").click(function (e) { 
+    $("#btn-ocultar").click(function (e) { 
         e.preventDefault();
         $("h1").hide();
         $("p").hide();
     });
-
+    $("#btn-mostrar").click(function (e) { 
+        e.preventDefault();
+        $("h1").show();
+        $("p").show();
+    });
 });
