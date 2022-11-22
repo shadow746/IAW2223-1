@@ -33,6 +33,7 @@ texto”. Utiliza algunas de las funciones de clases que tiene jQuery.-->
         $("button").click(function (e) { 
             e.preventDefault();
             let texto=$("div").text();
+            
             (texto !="") ?  $("div").empty() : $("div").text("texto");
                         
         });
