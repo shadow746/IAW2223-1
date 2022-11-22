@@ -14,8 +14,8 @@
         }
         img {
             border-radius: 10px;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             margin-left: 5px;
         }
     </style>
@@ -39,8 +39,9 @@ iconarchive.com.-->
     <script>
     $(document).ready(function () {
 
-       $("a").append('<img src="iconDescarga.png"</img>');
-       
+       $("a").prepend("<img src='iconDescarga.png'</img>");
+       //$("a").prepend('<img src="iconDescarga.png"</img>');
+       //tambien podemos escapar la comilla con \'
     });
      </script>
 </body>

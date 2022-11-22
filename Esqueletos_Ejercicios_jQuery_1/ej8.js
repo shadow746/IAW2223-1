@@ -13,7 +13,7 @@ $(document).ready(function () {
 
     $("#btn-parrafo").click(function (e) { 
         e.preventDefault();
-        let parrafo = $("p").text();
+        let parrafo = $("p").html();
         alert(parrafo);
     });
 });

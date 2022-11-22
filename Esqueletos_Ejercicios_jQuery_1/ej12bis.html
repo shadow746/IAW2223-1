@@ -15,6 +15,10 @@
             justify-content: center;
             line-height: 300px;
         }
+
+        .invisible{
+            color: transparent;
+        }
         
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -28,13 +32,12 @@ texto”. Utiliza algunas de las funciones de clases que tiene jQuery.-->
         Texto
     </div>
     <button>Vaciar div</button>
+
     <script>
        $(document).ready(function () {
         $("button").click(function (e) { 
             e.preventDefault();
-            let texto=$("div").text();
-            
-            (texto !="") ?  $("div").empty() : $("div").text("Texto");
+            $("div").toggleClass(".invisible");
                         
         });
        });
