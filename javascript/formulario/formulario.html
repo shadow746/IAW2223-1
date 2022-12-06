@@ -9,32 +9,41 @@
     <title>Formulario</title>
 </head>
 <body>
-    <form action="signup.php" method="post">
+    <!-- <form action="signup.php" method="post"> -->
         <div>
-            <label>Nombre: </label><input class="form" type="text" id="dato0" required placeholder="Nombre">
-            <label id="error0"></label><br><br>
+            <label>Nombre (*): </label><input class="form" type="text" id="dato0" required placeholder="Nombre">
+            <label class="error" id="error0"></label><br><br>
 
-            <label>Apellidos: </label><input class="form" type="text" id="dato1" required placeholder="Apellidos">
-            <label id="error1"></label><br><br>
+            <label>Primer Apellido (*): </label><input class="form" type="text" id="dato1" required placeholder="Primer Apellido">
+            <label class="error" id="error1"></label><br><br>
 
-            <label>Correo electrónico: </label><input class="form" type="email" id="dato2" required placeholder="Correo electrónico">
-            <label id="error2"></label><br><br>
+            <label>Segundo Apellido (*): </label><input class="form" type="text" id="dato2" required placeholder="Segundo Apellido">
+            <label class="error" id="error2"></label><br><br>
 
-            <label>Dirección: </label><input class="form" type="text" id="dato3" required placeholder="Dirección"><br><br>
-            <label>Ciudad: </label><input class="form" type="text" id="dato4" required placeholder="Ciudad"><br><br>
-            <label>Teléfono: </label><input class="form" type="number" id="dato5" required placeholder="Teléfono"><br><br>
+            <label>Correo electrónico (*): </label><input class="form" type="email" id="dato3" required placeholder="Correo electrónico">
+            <label class="error" id="error3"></label><br><br>
+                   
+            <label>DNI (*): </label><input class="form" type="text" id="dato4" required placeholder="DNI">
+            <label class="error" id="error4"></label><br><br>
         
-            <label>DNI: </label><input class="form" type="text" id="dato6" required placeholder="DNI">
-            <label id="error6"></label><br><br>
+            <label>Contraseña (*): </label><input class="form" type="password" id="dato5" required placeholder="Mínimo 8 caracteres">
+            <label class="error" id="error5"></label><br><br>
         
-            <label>Contraseña: </label><input class="form" type="password" id="dato7" required placeholder="Contraseña">
-            <label id="error7"></label><br><br>
-        
-            <label>Repetir Contraseña: </label><input class="form" type="password" id="dato8" required placeholder="Repetir contraseña">
-            <label id="error8"></label><br><br>
+            <label>Repetir Contraseña (*): </label><input class="form" type="password" id="dato6" required placeholder="Repetir contraseña">
+            <label class="error" id="error6"></label><br><br>
+
+            <label>Descripción</label><br>
+            <textarea name="" id="" cols="30" rows="10"></textarea><br>
+            <label>Fecha de Nacimento: </label>
+            <input id="fecha" type="date" title="Ingresa una fecha entre 1900 y la fecha de hoy"><br>
+            <label class="error" id="fechamal"></label><br><br>
+            <input type="checkbox" id="dato7"><label for="">Estoy de acuerdo con los datos </label>
+            <label class="error" id="error7"></label><br><br>
+            <label for="">Los campos marcados con (*) son obligatorios</label><br><br>
         </div>
     <button onclick="ValidarFormulario()">Validar</button>
-    </form>
+    <!--</form>-->
     <div id="resultado"></div>
+    <div class="usuario" id="usuario"></div>
 </body>
 </html>
