@@ -8,10 +8,10 @@
 </head>
 <body>
 <?php
-    $a=5;
+    $a=10;
     $b=6;
     $cadena = "Esto es mi variable de cadena";
-    
+
     echo "<p>suma x+y=" .   $a+$b . "</p><br>";
     echo "<p>resta x-y=" .   $a-$b . "</p><br>";
     echo "<p>multiplicar x*y=" .   $a*$b . "</p><br>";
