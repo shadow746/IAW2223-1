@@ -7,108 +7,135 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alexandria">
     <title>Visualizador libros</title>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="libros.css">
-    <title>Libros por nombre</title>
-</head>
-<body>/* Hacerlo  que busque los libros por titulo*/
-    <div class="contendor">
-        <div class="formulario">
-            <h1>Gutendex API</h1>
-            <label for="codlibro">Código Libro:</label>
-            <input type="number" name="codLibro" id="codLibro" min="1">
-            <br>
-            <label for="titlibro">Titulo Libro:</label>
-            <input type="text" name="titlibro" id="titulolibro">
-            <label for="botones">Acción:</label>
-            <button id="btn-libro">Obtener libro pot codigo</button>
-            <button id="btn-librotitulo">Obtener libro por titulo </button>
-            <button id="btn-todos">Ver todos</button>
-            <div id="resultados">
-                <!-- Aqui cargaremos los resultados-->
-            </div>
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-                $.get("https://gutendex.com/books/").done(function (resp){
-                    let num_libros = resp.results.length;
-                    $( function (){
+    <link rel="stylesheet" href="libros2.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>   
 
-                        let availableTags =[];
-                        for (let i=0; i<num_libros; i++){
-                            let respuesta = new Object(resp.results[i]);
-                            let titulo = respuesta.title;
-                            let autor = respuesta.authors.length == 0 ? "Anónimo" : respuesta.authors[0].name;
-                            let imagen = respuesta.formats['image/jpeg'];
-                            let enlace = respuesta.formats['text/plain; charset=us-ascii'];
-                            let numeroDescargas = respuesta.download_count;
-                            availableTags[i]= respuesta.title;
+    <title>Libros por Título y Autor</title>
+</head>
+<body>
+    <script>
+        
+        var availableTags =[];
+        var availableTags2 = [];
+        var masdeuno = [];
+        var respuesta=[];
+
+        $(document).ready(function () {
+            $.get("https://gutendex.com/books/").done(function (r){
+                let num_libros = r.results.length;
+                
+                $( function (){
+
+                    for (let i=0; i<num_libros; i++)
+                    {
+                        respuesta[i] = new Object(r.results[i]);
+                        availableTags[i] = respuesta[i].title;
+                        if(respuesta[i].authors[0]==" ")
+                        {
+                            let autor = "Anónimo";
+                            availableTags2[i]= autor;
+                        }else
+                        {
+                            AgregarAutor(respuesta[i].authors,i);
                         }
-                        $("#titulolibro").autocomplete({source: availableTags});
+                            //availableTags2[i] = respuesta[i].autor;
+                    }
+                    $("#titulolibro").autocomplete({source: availableTags});
+                    UnirAutores();
+                    $("#autorlibro").autocomplete({source: availableTags2});
                         
-                    });
+                });
                     
-                });
-            
-                $("#btn-todos").click(function (e) { 
-                e.preventDefault();
-                $.get("https://gutendex.com/books/").done(function (r){
-                    let num_libros = r.results.length;
-                    $("#resultados").empty();
-                        for (let i=0; i<num_libros; i++){
-                            let respuesta = new Object(r.results[i]);
-                            let titulo = respuesta.title;
-                            let autor = respuesta.authors.length == 0 ? "Anónimo" : respuesta.authors[0].name;
-                            let imagen = respuesta.formats['image/jpeg'];
-                            let enlace = respuesta.formats['text/plain; charset=us-ascii'];
-                            let numeroDescargas = respuesta.download_count;
-                            $('#resultados').append(
-                            '<p>'+'<img width="120" src="'+imagen+'"></p>' +
-                            '<p>Título: '+titulo+'</p>' + 
-                            '<p>Autor: '+autor+'</p>' + 
-                            '<p><a href="'+enlace+'" target="_blank">Descarga aquí</a></p>' + 
-                            '<p>Nº descargas: ' + numeroDescargas + '</p>');
-                        }
-                    });
-                });
-                $("#btn-libro").click(function(){
-                    let codigo = $("#codLibro").val();
-                    $.get("https://gutendex.com/books/"+codigo).done(function (respuesta){
-                        console.log(respuesta);
-                        let titulo = respuesta.title;
+            });
+            console.log(respuesta)
+            $("#btn-librotitulo").click(function () { 
+                let titulo = $("#titulolibro").val();
+                let fin = respuesta.length;
+                for (let i=0;i<fin;i++)
+                {
+                    if (respuesta[i].title==titulo)
+                    {
                         let autor = respuesta.authors.length == 0 ? "Anónimo" : respuesta.authors[0].name;
                         let imagen = respuesta.formats['image/jpeg'];
                         let enlace = respuesta.formats['text/plain; charset=us-ascii'];
                         let numeroDescargas = respuesta.download_count;
                         $("#resultados").empty();
                         $('#resultados').append(
-                            '<p>'+'<img width="120" src="'+imagen+'"></p>' +
-                            '<p>Título: '+titulo+'</p>' + 
-                            '<p>Autor: '+autor+'</p>' + 
-                            '<p><a href="'+enlace+'" target="_blank">Descarga aquí</a></p>' + 
-                            '<p>Nº descargas: ' + numeroDescargas + '</p>');
-                    }).fail(function (respuesta){
-                        alert("Error en este libro");
-                    });
-
-                });
-                $("#btn-librotitulo").click(function () { 
-                   let longitud = resp.results.length;
-
-                   for (let i=0;i<longitud;i++)
-                   {
-                    let respuesta = new Object (resp.results[i])
-                    let title = respuesta.title
-                    if (title == $("#titulolibro").val())
-                    {
-                        let pos = i;
+                        '<p>'+'<img width="120" src="'+imagen+'"></p>' +
+                        '<p>Título: '+titulo+'</p>' + 
+                        '<p>Autor: '+autor+'</p>' + 
+                        '<p><a href="'+enlace+'" target="_blank">Descarga aquí</a></p>' + 
+                        '<p>Nº descargas: ' + numeroDescargas + '</p>');
                     }
-                   }
-                   $("#resultados").append(resp);
-
-                    
-                });
+                }
+                
+            });
         });
+
+        function AgregarAutor (autor,i)
+        {
+            let fin = autor.length;
+            let existe = 0;
+            if(fin > 0)
+            {
+                for(let j=0;j<fin;j++)
+                {
+                    masdeuno[j]=autor[j];
+                }
+            }else
+            {
+                for(let k=0;k<i;k++)
+                {
+                    if(availableTags2[k] == autor)
+                    {
+                        existe=1;
+                    }
+                }
+                if (existe==0)
+                {
+                    availableTags2[i] = autor;
+                }
+            }
+        }
+
+        function UnirAutores()
+        {
+            let inicio, final,insertar;
+            inicio = availableTags2.length;
+            insertar = inicio;
+            final = masdeuno.length;
+            for (let i=0;i<inicio;i++)
+            {
+                for(let j=0;j<final; j++)
+                {
+                    if(availableTags2[i] != masdeuno[j])
+                    {
+                        insertar = insertar + 1;
+                        availableTags2[insertar] = masdeuno[j];
+                    }
+                }
+            }           
+        }
     </script>
+    <div class="contendor">
+        <div class="formulario">
+            <h1>Gutendex API</h1>
+            <label for="autorlibro">Autor Libro:</label>
+            <input type="text" name="autorlibro" id="autorlibro">
+            <br>
+            <label for="titulolibro">Título Libro:</label>
+            <input type="text" name="titulolibro" id="titulolibro">
+            <label for="botones">Acción:</label>
+            <button id="btn-libroautor">Obtener libro pot autor</button>
+            <button id="btn-librotitulo">Obtener libro por titulo </button>
+            <!--<button id="btn-todos">Ver todos</button>-->
+            <div id="resultados">
+                <!-- Aqui cargaremos los resultados-->
+            </div>
+        </div>
+    </div>
 </body>
 </html>
