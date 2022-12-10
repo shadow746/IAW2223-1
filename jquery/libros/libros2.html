@@ -125,10 +125,10 @@ $(document).ready(function () {
                 {
                     if (respuesta[i].title==titulo)
                     {
-                        let autor = respuesta.authors.length == 0 ? "Anónimo" : respuesta.authors[0].name;
-                        let imagen = respuesta.formats['image/jpeg'];
-                        let enlace = respuesta.formats['text/plain; charset=us-ascii'];
-                        let numeroDescargas = respuesta.download_count;
+                        let autor = respuesta[i].authors.length == 0 ? "Anónimo" : respuesta[i].authors[0].name;
+                        let imagen = respuesta[i].formats['image/jpeg'];
+                        let enlace = respuesta[i].formats['text/plain; charset=us-ascii'];
+                        let numeroDescargas = respuesta[i].download_count;
                         $("#resultados").empty();
                         $('#resultados').append(
                         '<p>'+'<img width="120" src="'+imagen+'"></p>' +
