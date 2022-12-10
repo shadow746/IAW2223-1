@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alexandria">
+    <link rel="stylesheet" href="futbol.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>Resultados Futbol</title>
+</head>
+<body>
+    <div class="contendor">
+        <div class="formulario">
+            <h1>Words API</h1>
+            <label for="deporte">Resultados Futbol</label>
+            <input type="text" name="deportivo" id="futbol" placeholder=" " >
+            <br>
+            <label for="botones">Acción:</label>
+            <button id="btn-equipo">Resultado equipo</button>
+            <button id="btn-todos">Todos los resultados</button>
+            <div id="resultados">
+                <!-- Aqui cargaremos los resultados-->
+            </div>
+        </div>
+    </div>
+    <script>
+        const settings = {
+	            "async": true,
+	            "crossDomain": true,
+	            "url": "https://api-football-v1.p.rapidapi.com/v3/timezone",
+	            "method": "GET",
+	            "headers": {
+		        "X-RapidAPI-Key": "e56b562939msh0f068dd7e0f99cap1ccbc3jsn1cd69d2d5d27",
+		        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+	            }
+            };
+        $(document).ready(function () {
+            $("#btn-todos").click(function (e) { 
+                e.preventDefault();
+                
+
+                $.ajax(settings).done(function (response) {
+	             console.log(response);
+                 $("#resultados").append("<p>"+response+"</p>");
+                });
+             });
+                
+    
+
+            $("#btn-persona").click(function (e) { 
+                e.preventDefault();
+                $("#resultados").empty();
+                let palabra = $("#word").val();
+                $.get("https://wordsapiv1.p.mashape.com/words/"+palabra+"/definitions/").done(function(respuesta)
+                {
+                    console.log(respuesta);
+                    let palabra = respuesta.word;
+                    $("#resultados").append("<p>"+palabra+"</p>");
+                    let num_def = respuesta.definitions.length;
+                    for(let i=0;i<num_def;i++)
+                    {
+                        $("#resultados").append("<p>Deficion "+i+": " + respuesta.definition[i]+"</p>");
+                    }
+                });
+                
+            });
+        });
+    </script>
+</body>
+</html>
