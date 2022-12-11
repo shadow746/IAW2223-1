@@ -140,11 +140,11 @@ $(document).ready(function () {
                 {
                     if (AutorEsta(autor,i))
                     {
-                        let autor = respuesta[i].authors.length == 0 ? "Anónimo" : respuesta[i].authors[0].name;
+                        
+                        let autor = respuesta[i].authors.name;
                         let imagen = respuesta[i].formats['image/jpeg'];
                         let enlace = respuesta[i].formats['text/plain; charset=us-ascii'];
                         let numeroDescargas = respuesta[i].download_count;
-                        $("#resultados").empty();
                         $('#resultados').append(
                         '<p>'+'<img width="120" src="'+imagen+'"></p>' +
                         '<p>Título: '+titulo+'</p>' + 
