@@ -111,8 +111,39 @@ function CalcularUsuario(entradas)
     apellido2=SinEspacios(entradas[2].toLowerCase());
     console.log(entradas[0],entradas[1],entradas[2]);
     usuario = nombre.substring(0,1) + apellido1.substring(0,3) + apellido2.substring(0,3) + entradas[4].substr(5,3) ;
+    usuario = SinTildes(usuario);
     return (usuario);
 }
+
+function SinTildes (usuario)
+{
+    usuario = Array.from(usuario);
+    let tamano = usuario.length;
+    for(let i=0;i<tamano;i++)
+    {
+        if(usuario[i]=='á')
+        {
+            usuario[i] = 'a';
+        }else if (usuario [i] == 'é')
+            {
+                usuario[i] = 'e';
+            }else if (usuario[i] == 'í')
+                {
+                    usuario[i] = 'i';
+                }else if (usuario[i] == 'ó')
+                    {
+                        usuario[i] = 'o';
+                    }else if (usuario[i] == 'ú')
+                        {
+                            usuario[i] = 'u';
+                        }
+    }
+
+    usuario = usuario.join("");
+
+    return(usuario);
+}
+
 function SinEspacios (nombre)
 {
     let i,j,long1;
