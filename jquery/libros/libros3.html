@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Alexandria">
+    <title>Visualizador libros</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="libros3.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="libros3.js"></script>
+
+    <title>Libros por Título y Autor</title>
+</head>
+<body>
+    <!--<script>
+        
+
+
+        
+
+        function AgregarAutores ()
+        {
+            let fin = respuesta.length;
+
+            for (let i=0;i<fin;i++)
+            {
+                if(respuesta[i].authors.length==0)
+                {
+                    UnirAutores("anonimo",i);
+
+                }else if (respuesta[i].authors.length==1)
+                {
+                    //availableTags[i] = respuesta[i].authors[0].name;
+                    UnirAutores(respuesta[i].authors[0].name,i);
+
+                }else
+                {
+                    for (let j=0;j<respuesta[i].authors.length;j++)
+                    {
+                       UnirAutores(respuesta[i].authors[j].name,i);
+                    }
+                }
+            }
+        }
+
+        function UnirAutores(autor,i)
+        {
+            let existe=0;
+            
+            for (let j=0;i<i;j++)
+            {
+                if(availableTags[j]==autor)
+                {
+                    existe=1;
+                }
+            }
+            if (existe==0)
+            {
+                availableTags[i]=autor;
+            }           
+        }
+    </script>-->
+    <div class="contendor">
+        <div class="formulario">
+            <h1>Gutendex API</h1>
+            <label for="autorlibro">Autor Libro:</label>
+            <input type="text" name="autorlibro" id="autorlibro">
+            <br>
+            <label for="titulolibro">Título Libro:</label>
+            <input type="text" name="titulolibro" id="titulolibro"><br>
+            <label for="botones">Acción:</label><br>
+            <button id="btn-libroautor">Obtener libro por autor</button>
+            <button id="btn-librotitulo">Obtener libro por titulo </button>
+            <!--<button id="btn-todos">Ver todos</button>-->
+            <div id="resultados">
+                <!-- Aqui cargaremos los resultados-->
+            </div>
+        </div>
+    </div>
+    <!--<script>
+    $(document).ready(function () {
+        console.log(respuesta)
+        
+        
+    });
+
+    function AutorEsta (autor,i)
+    {   
+        let esta=0;
+        let fin=respuesta[i].authors.length;
+        if(fin>1)
+        {
+            for (let j=0;j<fin;j++)
+            {
+                if ( autor == respuesta[i].authors[j].name)
+                {
+                    esta = 1;
+                }
+            }
+            return (esta);
+        }
+    }
+    </script>-->
+</body>
+</html>
