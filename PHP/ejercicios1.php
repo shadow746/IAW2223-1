@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios 1</title>
+</head>
+<body>
+<?php
+
+    $cadena = "Esto es mi variable de tipo cadena";
+    $a = 10;
+    $b = 6;
+    //Operaciones matematicas basicas
+    echo "<p><h1>Operaciones Matemáticas Basicas</h1></p>";
+    echo "<p>suma x+y=" .   $a+$b . "</p><br>";
+    echo "<p>resta x-y=" .   $a-$b . "</p><br>";
+    echo "<p>multiplicar x*y=" .   $a*$b . "</p><br>";
+    echo "<p>dividir x/y=" .   $a/$b . "</p><br>";
+    echo "<p>El resto de division x%y (10/6)= " . $a%$b . "</p>";
+
+    //Tipos de datos uso de var_dump
+    $tipos = array(1,2,3, array("hola","casa","a"),4.5);
+    $logica = true;
+    echo "<p><h1>Diferentes tipos de datos en PHP con funcion var_dump()</h1></p>";
+    echo var_dump($tipos,$logica);
+
+    //Manejo de cadenas
+    echo "<p><h1>Manejo de Cadenas</h1></p>";
+    $long = strlen($cadena);
+    $numpal = str_word_count($cadena);
+    $reves = strrev($cadena);
+    $esta = strpos($cadena, "tipo");
+    $noesta = strpos($cadena, "Sevilla");
+    $cadena2 = str_replace("cadena", "string", $cadena);
+
+    echo "<p>Esta es mi cadena: " . $cadena . "</p>";
+    echo "<p>La longitud de la cadena es: " . $long . "</p>";
+    echo "<p>El numero de palabras de la cadena es: "  . $numpal . "</p>";
+    echo "<p>La cadena invertida es: " . $reves . "</p>";
+    if($esta!=FALSE)
+    {
+        echo "<p>La palabra tipo esta en la cadena</p>";
+    }else
+    {
+        echo "<p>La palabra tipo no esta en la cadena</p>";
+    }
+
+    if($noesta==FALSE)
+    {
+        echo "<p>La palabra Sevilla no esta en la cadena</p>";
+    }else
+    {
+        echo "<p>La palabra Sevilla esta en la cadena</p>";
+    }
+    echo "<p>Sustituimos cadena por string: " . $cadena2 . "</p>";
+
+    //Ejemplo de variable Globales
+   echo "<p><h1>Crear un cuadrado random</h1></p>";
+    $r = mt_rand(0, 255 );
+    $g = mt_rand(0, 255 );
+    $b = mt_rand(0, 255 );
+   echo "
+
+   <style>
+   #figura {
+       width: 300px;
+       height: 300px;
+       background: rgb(".$r.",".$g.",".$b.");
+   }
+   div {margin-bottom:20px;}
+   </style>
+   <div id=figura></div>";
+
+   //Mostra emoticones aleatorios
+   echo "<p><h1>Mostrar emoticones</h1></p>";
+   $emoji=mt_rand(128512,128586);
+   echo "<p>&#".$emoji."</p>";
+
+
+   //USO DE VBLES GLOBALES
+
+    echo $_SERVER['PHP_SELF'];
+    echo "<br>";
+    echo $_SERVER['SERVER_NAME'];
+    echo "<br>";
+    echo $_SERVER['HTTP_HOST'];
+    echo "<br>";
+    echo $_SERVER['HTTP_REFERER'];
+    echo "<br>";
+    echo $_SERVER['HTTP_USER_AGENT'];
+    echo "<br>";
+    echo $_SERVER['SCRIPT_NAME'];
+
+   //Imagenes aleatorias en el servidor
+echo "<br><br><br>";
+ /* extensiones a mostrar*/
+$extensions = array('jpg','jpeg','gif','png','bmp');
+
+// nombre del directorio
+$nombre_directorio_imagenes = "/imagenes";
+
+// ruta del directorio
+$ruta_directorio_imagenes = $_SERVER['DOCUMENT_ROOT'].$nombre_directorio_imagenes;
+
+// url del directorio
+$url_directorio = 'http://'.$_SERVER["SERVER_NAME"].$nombre_directorio_imagenes;
+
+// array de imagenes
+$images = array();
+
+//srand((float) microtime() * 10000000); // Si es PHP Version < 4.2.0
+
+// abrimos directorio y mostramos imagenes
+if ($handle = opendir($ruta_directorio_imagenes)) {
+    while (false !== ($file = readdir($handle))) {
+        if ($file != "." && $file != "..") {
+
+	  // obtener extension del archivo
+	  $ext = strtolower(substr(strrchr($file, "."), 1));
+		
+          // almacenamos en el array
+	  if(in_array($ext, $extensions)){
+	    $images[] = $url_to_folder.$file;
+	  }
+        }
+    }
+    closedir($handle);
+}
+
+if(!empty($images)){ // si tenemos algo que mostrar...
+	$rand_key = array_rand($images, 1);
+	$src = $images[$rand_key];
+	echo "<img src='".$src."' align='absmiddle'>";
+
+	// mostrar una segunda imagen diferente a la primera
+	unset($images[$rand_key]);
+	$rand_key = array_rand($images, 1);
+	$src = $images[$rand_key];
+	echo "<br /><br /><img src='".$src."' align='absmiddle'>";
+}else{
+	// nada que mostrar
+	echo 'No se encontraron imagenes en <strong>'.$ruta_directorio_imagenes.'</strong>';
+}
+
+    
+
+
+?>
+</body>
+</html>
+
