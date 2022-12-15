@@ -31,7 +31,7 @@
     $long = strlen($cadena);
     $numpal = str_word_count($cadena);
     $reves = strrev($cadena);
-    $esta = strpos($cadena, "tipo");
+    $esta = strpos($cadena, "Esta");
     $noesta = strpos($cadena, "Sevilla");
     $cadena2 = str_replace("cadena", "string", $cadena);
 
@@ -39,12 +39,12 @@
     echo "<p>La longitud de la cadena es: " . $long . "</p>";
     echo "<p>El numero de palabras de la cadena es: "  . $numpal . "</p>";
     echo "<p>La cadena invertida es: " . $reves . "</p>";
-    if($esta!=FALSE)
+    if($esta!==0)
     {
-        echo "<p>La palabra tipo esta en la cadena</p>";
+        echo "<p>La palabra Esta esta en la cadena</p>";
     }else
     {
-        echo "<p>La palabra tipo no esta en la cadena</p>";
+        echo "<p>La palabra Esta no esta en la cadena</p>";
     }
 
     if($noesta==FALSE)
@@ -95,20 +95,23 @@
 
    //Imagenes aleatorias en el servidor
 echo "<br><br><br>";
+
+
  /* extensiones a mostrar*/
 $extensions = array('jpg','jpeg','gif','png','bmp');
 
 // nombre del directorio
-$nombre_directorio_imagenes = "/imagenes";
+$nombre_directorio_imagenes = "/imagenes/";
 
 // ruta del directorio
 $ruta_directorio_imagenes = $_SERVER['DOCUMENT_ROOT'].$nombre_directorio_imagenes;
 
 // url del directorio
 $url_directorio = 'http://'.$_SERVER["SERVER_NAME"].$nombre_directorio_imagenes;
-
+echo $url_directorio;
 // array de imagenes
 $images = array();
+$posicion=random_int(0,count($images));
 
 //srand((float) microtime() * 10000000); // Si es PHP Version < 4.2.0
 
@@ -122,29 +125,33 @@ if ($handle = opendir($ruta_directorio_imagenes)) {
 		
           // almacenamos en el array
 	  if(in_array($ext, $extensions)){
-	    $images[] = $url_to_folder.$file;
+	    $images[] = $url_directorio.$file;
 	  }
         }
     }
     closedir($handle);
 }
-
+//echo $images[0];
 if(!empty($images)){ // si tenemos algo que mostrar...
-	$rand_key = array_rand($images, 1);
-	$src = $images[$rand_key];
+	$rand_pos = array_rand($images, 1);
+	$src = $images[$rand_pos];
 	echo "<img src='".$src."' align='absmiddle'>";
 
 	// mostrar una segunda imagen diferente a la primera
-	unset($images[$rand_key]);
-	$rand_key = array_rand($images, 1);
-	$src = $images[$rand_key];
+	unset($images[$rand_pos]);
+	$rand_pos = array_rand($images, 1);
+	$src = $images[$rand_pos];
 	echo "<br /><br /><img src='".$src."' align='absmiddle'>";
 }else{
 	// nada que mostrar
 	echo 'No se encontraron imagenes en <strong>'.$ruta_directorio_imagenes.'</strong>';
 }
 
-    
+/*Mostra imagenes forma facil
+$fotos = array('bloqueo 48h.png','bloqueo csv.png','crear usuarios.png');
+$posicion = rand(0,count($fotos)-1);
+$ruta = '/var/www/html/imagenes/';
+echo "<img src='".$ruta."fotos(".$posicion.")."'>"; **/
 
 
 ?>
