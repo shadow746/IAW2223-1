@@ -47,7 +47,7 @@
         echo "<p>La palabra Esta no esta en la cadena</p>";
     }
 
-    if($noesta==FALSE)
+    if($noesta===FALSE)
     {
         echo "<p>La palabra Sevilla no esta en la cadena</p>";
     }else
@@ -93,11 +93,38 @@
     echo "<br>";
     echo $_SERVER['SCRIPT_NAME'];
 
-   //Imagenes aleatorias en el servidor
+   //IMuestra aleatoriamente imagenes que estan en el servidor
 echo "<br><br><br>";
+$directorio_imagenes = '/imagenes/'; //indico el directorio de las imagenes
+$ruta_imagenes= $_SERVER['DOCUMENT_ROOT'].$directorio_imagenes; //establezco la ruta de las imagenes
+//uso la vble gobal que me da la ruta de la carpeta root y le añado donde estan las imagenes
+// /var/www/html y añado /imagenes/
+$imagenes = array();//creo el array donde van a guardarse las imagenes
+
+//abro la ruta de las imagenes (opendir) y leo el directorio (readdir)
+//siempre que el file no sea . o .. añado el nombre al array de imagenes
+if ($gestor = opendir($ruta_imagenes)){
+    while (false != ($file = readdir($gestor))){
+        if ($file != "." && $file !=".."){
+            $imagenes[] = $directorio_imagenes.$file;
+        
+        }
+    }
+    closedir($gestor);//cierro el directorio
+}
+// si hay imagenes cacula ua random y muestra la que corresponde
+if (!empty($imagenes)){
+    $posicion = rand(0,count($imagenes)-1);
+    $src = $imagenes[$posicion];
+    echo "<img src='".$src."' alt='absmiddle'>";
+} else {
+    echo "No hay imagenes";
+}
 
 
- /* extensiones a mostrar*/
+/*
+$posicion = rand(o,count($imagenes)-1);
+ /* extensiones a mostrar
 $extensions = array('jpg','jpeg','gif','png','bmp');
 
 // nombre del directorio
