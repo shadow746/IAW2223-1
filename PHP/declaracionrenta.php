@@ -156,7 +156,7 @@ function CalcularRenta($ingresos)
     <span class="error"> * <?php echo $dniErr;?></span><br><br>
 
     <label for="ingresos">Ingresos brutos anuales:</label>
-    <input type="number" name="ingresos" placeholder="Introduce ingresos brutos anuales" >
+    <input type="number" name="ingresos" placeholder="Ingresos brutos anuales" >
     <span class="error"> * <?php echo $ingresosErr;?></span><br><br>
 
     <input type="checkbox" name="ong"><label for="ong">Quiero Donar a ONGs </label><br><br>
