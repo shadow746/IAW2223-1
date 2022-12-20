@@ -71,6 +71,7 @@ if(isset($_POST["submit"])) {
             echo "Lo siento, ha ocurrido un error en la subida de tu archivo.";
         }//PROBLEMA DE PERMISOS???? ES AQUI DONDE DA EL ERROR PQ????
     }
+    
 }
 ?>
 </body>
