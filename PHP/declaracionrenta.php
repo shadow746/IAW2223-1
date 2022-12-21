@@ -34,23 +34,26 @@ if(isset($_POST["submit"]))
         $dniErr = ValidarError($dni);
         $emailErr = ValidarError($email);
         $ingresosErr = VallidarError($ingresos);
+        echo $email;
     
     
-        if ($nombreErr =="" && $apellido1Err =="" && $apellido2Err =="" && $emailErr =="" && $dniErr =="" && $ingresosErr == ""){
+        if ($nombreErr && $apellido1Err && $apellido2Err && $emailErr && $dniErr && $ingresosErr == "")
+        {
     
             $emailOk = ValidarEmail($email);
             $dniOk= ValidarDni($dni);
-            $ingresosOk =true; //ValidarIngresos($ingresos);
+            $ingresosOk = ValidarIngresos($ingresos);
     
             if ($emailErr && $dniOk && $ingresosOk==true)
             {
-                $resultados = CalcularRenta($ingresos);
+                //$resultados = CalcularRenta($ingresos);
                 echo "Tus datos son los siguientes: <br>";
                 echo "<p>Nombre: ".$nombre."</p><br>";
                 echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
                 echo "<p>Dni: ".$dni."</p><br>";
                 echo "<p>Correo electrónico: ".$email."</p><br>";
-                echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
+                echo $ingresos;
+                //echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
     
             } else
             {
@@ -81,6 +84,19 @@ if(isset($_POST["submit"]))
 
 }
 
+function ValidarIngresos($dato)
+{
+    if ($datoO0)
+    {
+        $correcto = false;
+    }
+    else
+    {
+        $correcto = true;
+    }
+    return ($correcto);
+}
+
 function ValidarInput($datos){
     
     $datos = trim($datos);
@@ -103,7 +119,7 @@ function ValidarError ($datos)
     }
     return ($datos);
 }
-
+/*
 function ValidarDni($dni)
 {
     $letra = substr($dni, -1);
@@ -144,7 +160,7 @@ function CalcularRenta($ingresos)
         $resultado = $resultado - ($resultado+2/100);
     }
     return ($resultado);
-}
+}*/
 
 ?>
 
