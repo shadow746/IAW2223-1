@@ -25,11 +25,11 @@
         $participantes = explode(" ",$participantes);
         //$participantes2 = explode(" ",$participantes);<?php echo strip_tags($participantes);
         //parse_str($participantes);        
-        //$participantes2 = str_replace("\n",$participantes);
+        //$participantes2 = str_replace("<br />","<br>",$participantes);
         //var_dump($participantes);
-        //echo $participantes2;
+
         $premios = intval(htmlspecialchars($_POST["premios"]));
-        
+
         for ($i=1;$i<=$premios;$i++)
         {
             $premiado = mt_rand(1,count($participantes));
@@ -40,7 +40,7 @@
                 echo "<p>Lo siento el premio ".$i." queda vacante.</p>";
             }else
             {
-                echo "El premio ".$i." es para: ".$participantes($premiado);
+                echo "El premio ".$i." es para: ".$participantes[$premiado];
             }
         }
     }

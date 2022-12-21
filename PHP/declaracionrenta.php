@@ -16,8 +16,8 @@
 <?php
 
 
-//if(isset($_POST["submit"]))
-if ($_SERVER["REQUEST_METHOD"] == "POST")
+if(isset($_POST["submit"]))
+//if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
     
     //$inputerror = parse_str(file_get_contents("php://span"));
