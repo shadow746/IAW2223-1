@@ -21,23 +21,19 @@
 
         //$participantes = file_get_contents("php://textarea");
         
-        $participantes = $_POST["participantes"];
-        $participantes2 = explode(" ",$participantes);
-        //parse_str($participantes);
-        //$participantes2 = explode(" ",$participantes);
-
-        echo "<br>";
+        $participantes = htmlspecialchars($_POST["participantes"]);
+        $participantes = explode(" ",$participantes);
+        //$participantes2 = explode(" ",$participantes);<?php echo strip_tags($participantes);
+        //parse_str($participantes);        
+        //$participantes2 = str_replace("\n",$participantes);
         //var_dump($participantes);
-        //echo count($participantes);
-        echo $participantes2[2];
-        echo "<br>";
-        echo $participantes2[1];
         //echo $participantes2;
-        /*$premios = intval($_POST["premios"]);
+        $premios = intval(htmlspecialchars($_POST["premios"]));
+        
         for ($i=1;$i<=$premios;$i++)
         {
             $premiado = mt_rand(1,count($participantes));
-            echo count($participantes);
+            //echo count($participantes);
             echo $premiado;
             if ($premiado == 0)
             {
@@ -46,7 +42,7 @@
             {
                 echo "El premio ".$i." es para: ".$participantes($premiado);
             }
-        }*/
+        }
     }
     ?>
 
