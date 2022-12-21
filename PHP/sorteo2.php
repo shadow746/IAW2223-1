@@ -18,15 +18,22 @@
     <?php
 
     if(isset($_POST["submit"])){
+
+        //$participantes = file_get_contents("php://textarea");
         
         $participantes = $_POST["participantes"];
+        $participantes2 = explode(" ",$participantes);
+        //parse_str($participantes);
         //$participantes2 = explode(" ",$participantes);
-        echo $participantes;
+
         echo "<br>";
-        echo count($participantes);
+        //var_dump($participantes);
+        //echo count($participantes);
+        echo $participantes2[2];
         echo "<br>";
+        echo $participantes2[1];
         //echo $participantes2;
-        $premios = $_POST["premios"];
+        /*$premios = intval($_POST["premios"]);
         for ($i=1;$i<=$premios;$i++)
         {
             $premiado = mt_rand(1,count($participantes));
@@ -39,7 +46,7 @@
             {
                 echo "El premio ".$i." es para: ".$participantes($premiado);
             }
-        }
+        }*/
     }
     ?>
 

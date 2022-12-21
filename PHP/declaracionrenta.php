@@ -14,15 +14,19 @@
 <body>
 
 <?php
-$inputdata = file_get_contents("php://input");
-$inputerror = file_get_contents("php://span");
 
-parse_str($inputdata);
-parse_str($inputerror);
 
-if(isset($_POST["submit"]))
+//if(isset($_POST["submit"]))
+if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
-    $nombreErr = ValidarInput($nombre);
+    
+    //$inputerror = parse_str(file_get_contents("php://span"));
+    $inputdata = parse_str(file_get_contents("php://input"));
+
+    echo $nombre;
+    echo $apellido1;
+    echo $apellido2;
+    /*$nombreErr = ValidarInput($nombre);
     $apellido1Err = ValidarInput($apellido1);
     $apellido2Err = ValidarInput($apellido2);
     $emailErr = ValidarInput($email);
@@ -126,7 +130,7 @@ function CalcularRenta($ingresos)
         $resultado = $resultado - ($resultado+2/100);
     }
     return ($resultado);
-
+*/
 }
 
 ?>
