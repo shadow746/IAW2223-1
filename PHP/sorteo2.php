@@ -32,14 +32,13 @@
         for ($i=1;$i<=$premios;$i++)
         {
             $premiado = mt_rand(1,count($participantes));
-            //echo count($participantes);
-            echo $premiado;
+    
             if ($premiado == 0)
             {
-                echo "<p>Lo siento el premio ".$i." queda vacante.</p>";
+                echo "<p>Lo siento el premio ".$i." queda vacante.</p><br>";
             }else
             {
-                echo "El premio ".$i." es para: ".$participantes[$premiado];
+                echo "El premio ".$i." es para: ".$participantes[$premiado]."<br>";
             }
         }
     }
