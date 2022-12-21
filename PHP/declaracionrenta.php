@@ -20,13 +20,6 @@ if(isset($_POST["submit"]))
 {
     if ($_SERVER["REQUEST_METHOD"] == "POST")
     {
-        $nombreErr = ValidarError($nombre);
-        $apellido1Err = ValidarError($apellido1);
-        $apellido2Err = ValidarError($apellido2);
-        $dniErr = ValidarError($dni);
-        $emailErr = ValidarError($email);
-        $ingresosErr = VallidarError($ingresos);
-
         $nombre = ValidarInput($_POST["nombre"]);
         $apellido1 = ValidarInput($_POST["apellido1"]);
         $apellido2 = ValidarInput($_POST["apellido2"]);
@@ -35,7 +28,12 @@ if(isset($_POST["submit"]))
         $ingresos = ValidarInput($_POST["ingresos"]);
         $ong = ValidarInput($_POST["ong"]);
     
-
+        $nombreErr = ValidarError($nombre);
+        $apellido1Err = ValidarError($apellido1);
+        $apellido2Err = ValidarError($apellido2);
+        $dniErr = ValidarError($dni);
+        $emailErr = ValidarError($email);
+        $ingresosErr = VallidarError($ingresos);
     
     
         if ($nombreErr =="" && $apellido1Err =="" && $apellido2Err =="" && $emailErr =="" && $dniErr =="" && $ingresosErr == ""){
@@ -114,8 +112,11 @@ function ValidarDni($dni)
     if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numbers%23, 1) == $letra && strlen($letra) == 1 && strlen ($numbers) == 8 ){
         
         return true;
+    }else
+    {
+        return false;
     }
-    return false;
+    
 }
 
 function ValidarEmail($mail)
@@ -143,7 +144,6 @@ function CalcularRenta($ingresos)
         $resultado = $resultado - ($resultado+2/100);
     }
     return ($resultado);
-*/
 }
 
 ?>
