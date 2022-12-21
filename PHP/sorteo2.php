@@ -16,10 +16,9 @@
         <input type="submit" name="submit" value="Sortear">
     </form>
     <?php
-
+    //NO FUNCIONA SI USAMOS ENTER DENTRO DEL TEXTAREA
+    //FUNCIONA PERFECTAMENTE SI SEPARAMOS CON ESPACIOS.
     if(isset($_POST["submit"])){
-
-        //$participantes = file_get_contents("php://textarea");
         
         $participantes = htmlspecialchars($_POST["participantes"]);
         $participantes = explode(" ",$participantes);
