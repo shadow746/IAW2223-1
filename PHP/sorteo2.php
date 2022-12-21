@@ -18,6 +18,7 @@
     <?php
     //NO FUNCIONA SI USAMOS ENTER DENTRO DEL TEXTAREA
     //FUNCIONA PERFECTAMENTE SI SEPARAMOS CON ESPACIOS.
+
     if(isset($_POST["submit"])){
         
         $participantes = htmlspecialchars($_POST["participantes"]);
@@ -27,6 +28,14 @@
         //$participantes2 = str_replace("<br />","<br>",$participantes);
         //var_dump($participantes);
 
+        echo "Los participantes son: ";
+
+        for ($j=0;$j<count($participantes);$j++)
+        {
+            echo $participantes[$j].", ";
+        }
+
+        echo "<br>";
         $premios = intval(htmlspecialchars($_POST["premios"]));
 
         for ($i=1;$i<=$premios;$i++)
