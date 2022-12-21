@@ -17,80 +17,93 @@
 
 
 if(isset($_POST["submit"]))
-//if ($_SERVER["REQUEST_METHOD"] == "POST")
 {
+    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        $nombreErr = ValidarError($nombre);
+        $apellido1Err = ValidarError($apellido1);
+        $apellido2Err = ValidarError($apellido2);
+        $dniErr = ValidarError($dni);
+        $emailErr = ValidarError($email);
+        $ingresosErr = VallidarError($ingresos);
+
+        $nombre = ValidarInput($_POST["nombre"]);
+        $apellido1 = ValidarInput($_POST["apellido1"]);
+        $apellido2 = ValidarInput($_POST["apellido2"]);
+        $dni = ValidarInput($_POST["dni"]);
+        $email = ValidarInput($_POST["email"]);
+        $ingresos = ValidarInput($_POST["ingresos"]);
+        $ong = ValidarInput($_POST["ong"]);
     
-    //$inputerror = parse_str(file_get_contents("php://span"));
-    $inputdata = parse_str(file_get_contents("php://input"));
 
-    echo $nombre;
-    echo $apellido1;
-    echo $apellido2;
-    /*$nombreErr = ValidarInput($nombre);
-    $apellido1Err = ValidarInput($apellido1);
-    $apellido2Err = ValidarInput($apellido2);
-    $emailErr = ValidarInput($email);
-    $dniErr= ValidarInput($dni);
-    $ingresosErr = ValidarInput ($ingresos);
-
-    if ($nombreErr =="" && $apellido1Err =="" && $apellido2Err =="" && $emailErr =="" && $dniErr =="" && $ingresosErr == ""){
-
-        $emailOk = ValidarEmail($email);
-        $dniOk= ValidarDni($dni);
-        $ingresosOk =true; //ValidarIngresos($ingresos);
-
-        if ($emailErr && $dniOk && $ingresosOk==true)
-        {
-            $resultados = CalcularRenta($ingresos);
-            echo "Tus datos son los siguientes: <br>";
-            echo "<p>Nombre: ".$nombre."</p><br>";
-            echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
-            echo "<p>Dni: ".$dni."</p><br>";
-            echo "<p>Correo electrónico: ".$email."</p><br>";
-            echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
-
-        } else
-        {
-            if( $dniOk==false)
+    
+    
+        if ($nombreErr =="" && $apellido1Err =="" && $apellido2Err =="" && $emailErr =="" && $dniErr =="" && $ingresosErr == ""){
+    
+            $emailOk = ValidarEmail($email);
+            $dniOk= ValidarDni($dni);
+            $ingresosOk =true; //ValidarIngresos($ingresos);
+    
+            if ($emailErr && $dniOk && $ingresosOk==true)
             {
-                $dniErr = "El dni no es correcto";
-
-            } 
-        
-            if ($emailOk==false)
+                $resultados = CalcularRenta($ingresos);
+                echo "Tus datos son los siguientes: <br>";
+                echo "<p>Nombre: ".$nombre."</p><br>";
+                echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
+                echo "<p>Dni: ".$dni."</p><br>";
+                echo "<p>Correo electrónico: ".$email."</p><br>";
+                echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
+    
+            } else
             {
-                $emailErr = "El email no es correcto";
+                if( $dniOk==false)
+                {
+                    $dniErr = "El dni no es correcto";
+    
+                } 
+            
+                if ($emailOk==false)
+                {
+                    $emailErr = "El email no es correcto";
+                }
+    
+                if ($ingresosOk==false) 
+                {
+                    $ingresosErr = "Los ingresos no son correctos";
+                }
             }
-
-            if ($ingresosOk==false) 
-            {
-                $ingresosErr = "Los ingresos no son correctos";
-            }
+            
+            
+    
+            
         }
-        
-        
 
-        
     }
+
 
 }
 
 function ValidarInput($datos){
+    
+    $datos = trim($datos);
+    $datos = stripslashes($datos);
+    $datos = htmlspecialchars($datos);        
+     
+    return ($datos);
 
+}
+
+function ValidarError ($datos)
+{
     if ($datos == "")
     {
         $datos = "Este campo es obligatorio";
 
-    }else 
+    }else
     {
-        $datos = trim($datos);
-        $datos = stripslashes($datos);
-        $datos = htmlspecialchars($datos);
-        $datos = "";
-        
-    } 
+        $datos="";
+    }
     return ($datos);
-
 }
 
 function ValidarDni($dni)
