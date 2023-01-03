@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } else 
     {
         $dni = Validar($_POST["dni"]);
-        //$dniErr = ValidarDni($dni);
+        $dniErr = ValidarDni($dni);
        
     }
     if (empty($_POST["email"])) 
@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } else 
     {
         $email = Validar($_POST["email"]);
-        //$emailErr = ValidarEmail($email);
+        $emailErr = ValidarEmail($email);
         
     }
     if (empty($_POST["ingresos"])) 
@@ -76,28 +76,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     } else 
     {
         $ingresos = Validar($_POST["ingresos"]);
-        //$ingresosErr = ValidarIngresos($ingresos);
+        $ingresosErr = ValidarIngresos($ingresos);
         
     }        
         
     
-    if ($nombreErr && $apellido1Err && $apellido2Err && $emailErr && $dniErr && $ingresosErr == "")
+    if ($nombreErr =="" && $apellido1Err=="" && $apellido2Err=="" && $emailErr=="" && $dniErr=="" && $ingresosErr == "")
     {
     
-        //if ($emailErr && $dniErr && $ingresosErr=="")
-        //{
-            //$resultados = CalcularRenta($ingresos);
-            echo "Tus datos son los siguientes: <br>";
-            echo "<p>Nombre: ".$nombre."</p><br>";
-            echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
-            echo "<p>Dni: ".$dni."</p><br>";
-            echo "<p>Correo electrónico: ".$email."</p><br>";
-            echo $ingresos;
-            //echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
-    
-        //}    
-    
-            
+        $resultados = CalcularRenta($ingresos);
+        if (isset($_POST['ong']) && $_POST['ong'] == '1')
+        {
+            $porcentaje = ($resultados*2/100);
+        }
+        echo "El resultado de tu Declaracion es el siguientes: <br>";
+        echo "<p>Nombre: ".$nombre."</p><br>";
+        echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
+        echo "<p>Dni: ".$dni."</p><br>";
+        echo "<p>Correo electrónico: ".$email."</p><br>";
+        echo "<p>Ingresos Brutos: ".$ingresos." €</p><br>";
+        echo "<p>Se donará a ONGs: ".$porcentaje." €</p><br>";
+        echo "<p>Cantidad a pagar a Hacienda1: ".$resultados." €</p><br>";
+        echo "<p>Cantidad a pagar a Hacienda2: ".$resultados-$porcentaje." €</p><br>";
+       
     }
 
 }
@@ -166,18 +167,11 @@ function CalcularRenta($ingresos)
         break;
         case ($ingresos<35000): $resultado = $ingresos*20/100;
         break;
-        case ($ingresos<20000): $resultado = $ingresos*30/100;
+        case ($ingresos<40000): $resultado = $ingresos*30/100;
         break;
         default: $resultado = $ingresos*45/100;
     }
-
     return $resultado;
-    
-    /*if(isset($_POST[$ong]))
-    {
-        $resultado = $resultado - ($resultado+2/100);
-    }
-    return ($resultado);*/
 }
 
 ?>
@@ -210,7 +204,7 @@ function CalcularRenta($ingresos)
     <input type="number" name="ingresos" placeholder="Ingresos brutos anuales" >
     <span class="error"> * <?php echo $ingresosErr;?></span><br><br>
 
-    <input type="checkbox" name="ong"><label for="ong">Quiero Donar a ONGs </label><br><br>
+    <input type="checkbox" name="ong" value='1'><label for="ong">Quiero Donar a ONGs </label><br><br>
 
     <input type="submit" name="submit">
 
