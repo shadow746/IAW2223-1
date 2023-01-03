@@ -15,6 +15,33 @@
 
 <?php
 
+//Quiero asociar el nombre del input al valor que tome el input
+// $Valores["nombre"] => valor del input nombre
+/*$Valores = array ();
+$Inputs = array ("nombre","apellido1","apellido2","dni","email","ingresos");
+$longVal = sizeof($Inputs);
+$Errores = array ();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
+    for ($i=0;$i<$longVal;$i++)
+    {
+        $Valores[$i]=$_POST["$Inputs[$i]"];
+        echo $Valores[$i]."<br>" ;
+        if (empty($_POST["SValores[$i]"]))
+        {
+            $Errores[$i] = "El campo ".$Inputs[$i]." es obligatorio";
+            echo $Errores[$i];
+        } else
+        {
+            $Valores[$i]=$_POST["$Valores[$i]"];
+        }
+
+    }
+}*/
+
+
+
 $nombreErr=$apellido1Err=$apellido2Err=$dniErr=$emailErr=$ingresosErr="";
 
 
