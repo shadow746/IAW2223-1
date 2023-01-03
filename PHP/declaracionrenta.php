@@ -15,129 +15,145 @@
 
 <?php
 
+$nombreErr=$apellido1Err=$apellido2Err=$dniErr=$emailErr=$ingresosErr="";
 
-if(isset($_POST["submit"]))
+
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+//if(isset($_POST["submit"]))
 {
-    if ($_SERVER["REQUEST_METHOD"] == "POST")
+    if (empty($_POST["nombre"])) 
     {
-        $nombre = ValidarInput($_POST["nombre"]);
-        $apellido1 = ValidarInput($_POST["apellido1"]);
-        $apellido2 = ValidarInput($_POST["apellido2"]);
-        $dni = ValidarInput($_POST["dni"]);
-        $email = ValidarInput($_POST["email"]);
-        $ingresos = ValidarInput($_POST["ingresos"]);
-        $ong = ValidarInput($_POST["ong"]);
-    
-        $nombreErr = ValidarError($nombre);
-        $apellido1Err = ValidarError($apellido1);
-        $apellido2Err = ValidarError($apellido2);
-        $dniErr = ValidarError($dni);
-        $emailErr = ValidarError($email);
-        $ingresosErr = VallidarError($ingresos);
-        echo $email;
-    
-    
-        if ($nombreErr && $apellido1Err && $apellido2Err && $emailErr && $dniErr && $ingresosErr == "")
-        {
-    
-            $emailOk = ValidarEmail($email);
-            $dniOk= ValidarDni($dni);
-            $ingresosOk = ValidarIngresos($ingresos);
-    
-            if ($emailErr && $dniOk && $ingresosOk==true)
-            {
-                //$resultados = CalcularRenta($ingresos);
-                echo "Tus datos son los siguientes: <br>";
-                echo "<p>Nombre: ".$nombre."</p><br>";
-                echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
-                echo "<p>Dni: ".$dni."</p><br>";
-                echo "<p>Correo electrónico: ".$email."</p><br>";
-                echo $ingresos;
-                //echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
-    
-            } else
-            {
-                if( $dniOk==false)
-                {
-                    $dniErr = "El dni no es correcto";
-    
-                } 
-            
-                if ($emailOk==false)
-                {
-                    $emailErr = "El email no es correcto";
-                }
-    
-                if ($ingresosOk==false) 
-                {
-                    $ingresosErr = "Los ingresos no son correctos";
-                }
-            }
-            
-            
-    
-            
-        }
+        $nombreErr = "El campo nombre es obligatorio";
 
+    } else 
+    {
+        $nombre = Validar($_POST["nombre"]);
+        
     }
+    if (empty($_POST["apellido1"])) 
+    {
+        $apellido1Err = "El campo primer apellido es obligatorio";
 
+    } else 
+    {
+        $apellido1 = Validar($_POST["apellido1"]);
+        
+    }
+    if (empty($_POST["apellido2"])) 
+    {
+        $apellido2Err = "El campo segundo apellido es obligatorio";
+
+    } else 
+    {
+        $apellido2 = Validar($_POST["apellido2"]);
+        
+    }
+        
+    if (empty($_POST["dni"])) 
+    {
+        $dniErr = "El campo dni es obligatorio";
+
+    } else 
+    {
+        $dni = Validar($_POST["dni"]);
+        //$dniErr = ValidarDni($dni);
+       
+    }
+    if (empty($_POST["email"])) 
+    {
+        $emailErr = "El campo email es obligatorio";
+
+    } else 
+    {
+        $email = Validar($_POST["email"]);
+        //$emailErr = ValidarEmail($email);
+        
+    }
+    if (empty($_POST["ingresos"])) 
+    {
+        $ingresosErr = "El campo ingresos es obligatorio";
+
+    } else 
+    {
+        $ingresos = Validar($_POST["ingresos"]);
+        //$ingresosErr = ValidarIngresos($ingresos);
+        
+    }        
+        
+    
+    if ($nombreErr && $apellido1Err && $apellido2Err && $emailErr && $dniErr && $ingresosErr == "")
+    {
+    
+        //if ($emailErr && $dniErr && $ingresosErr=="")
+        //{
+            //$resultados = CalcularRenta($ingresos);
+            echo "Tus datos son los siguientes: <br>";
+            echo "<p>Nombre: ".$nombre."</p><br>";
+            echo "<p>Apellidos: ".$apellido1." ".$apellido2."</p><br>";
+            echo "<p>Dni: ".$dni."</p><br>";
+            echo "<p>Correo electrónico: ".$email."</p><br>";
+            echo $ingresos;
+            //echo "<p>Ingresos Brutos: ".$resultados." €</p><br>";
+    
+        //}    
+    
+            
+    }
 
 }
 
-function ValidarIngresos($dato)
-{
-    if ($datoO0)
-    {
-        $correcto = false;
-    }
-    else
-    {
-        $correcto = true;
-    }
-    return ($correcto);
-}
+function Validar($datos){
 
-function ValidarInput($datos){
-    
-    $datos = trim($datos);
-    $datos = stripslashes($datos);
-    $datos = htmlspecialchars($datos);        
-     
-    return ($datos);
+   $datos = trim($datos);
+   $datos = stripslashes($datos);
+   $datos = htmlspecialchars($datos);
+        
+   return ($datos);
 
 }
 
-function ValidarError ($datos)
-{
-    if ($datos == "")
-    {
-        $datos = "Este campo es obligatorio";
 
-    }else
-    {
-        $datos="";
-    }
-    return ($datos);
-}
-/*
 function ValidarDni($dni)
 {
     $letra = substr($dni, -1);
     $numbers = substr($dni, 0, -1);
 
     if (substr("TRWAGMYFPDXBNJZSQVHLCKE", $numbers%23, 1) == $letra && strlen($letra) == 1 && strlen ($numbers) == 8 ){
-        
-        return true;
+    
+        $dni="";
+    
     }else
     {
-        return false;
+        $dni = "El dni no es válido";
+    
     }
+    return $dni;
     
 }
 
 function ValidarEmail($mail)
 {
-    return (false !== filter_var($mail, FILTER_VALIDATE_EMAIL));
+    if (filter_var($mail, FILTER_VALIDATE_EMAIL))
+    {
+        $mail = "";
+    }else{
+        $mail = "El mail no válido";
+    }
+    //return (false !== filter_var($mail, FILTER_VALIDATE_EMAIL));
+    return $mail;
+}
+
+function ValidarIngresos($dato)
+{
+    if ($dato<=0)
+    {
+        $correcto = "Los ingresos han de ser positivos";
+    }
+    else
+    {
+        $correcto = "";
+    }
+    return ($correcto);
 }
 
 function CalcularRenta($ingresos)
@@ -154,13 +170,15 @@ function CalcularRenta($ingresos)
         break;
         default: $resultado = $ingresos*45/100;
     }
+
+    return $resultado;
     
-    if(isset($_POST[$ong]))
+    /*if(isset($_POST[$ong]))
     {
         $resultado = $resultado - ($resultado+2/100);
     }
-    return ($resultado);
-}*/
+    return ($resultado);*/
+}
 
 ?>
 
