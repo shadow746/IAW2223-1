@@ -16,8 +16,6 @@
         <input type="submit" name="submit" value="Sortear">
     </form>
     <?php
-    //NO FUNCIONA SI USAMOS ENTER DENTRO DEL TEXTAREA
-    //FUNCIONA PERFECTAMENTE SI SEPARAMOS CON ESPACIOS.
 
     if(isset($_POST["submit"])){
         
@@ -50,7 +48,7 @@
 
         }else
         {
-            echo "Introduce un valor de premios valido"
+            echo "Introduce un valor de premios valido";
         }
         
     }
