@@ -22,11 +22,7 @@
     if(isset($_POST["submit"])){
         
         $participantes = htmlspecialchars($_POST["participantes"]);
-        $participantes = explode(" ",$participantes);
-        //$participantes2 = explode("\n",$participantes);<?php echo strip_tags($participantes);
-        //parse_str($participantes);        
-        //$participantes2 = str_replace("<br />","<br>",$participantes);
-        //var_dump($participantes);
+        $premios = intval(htmlspecialchars($_POST["premios"]));
 
         echo "Los participantes son: ";
 
@@ -36,20 +32,37 @@
         }
 
         echo "<br>";
-        $premios = intval(htmlspecialchars($_POST["premios"]));
 
-        for ($i=1;$i<=$premios;$i++)
+        if (is_numeric($premios) && $premios>=1 && round($premios,0)==$premios)
         {
-            $premiado = mt_rand(1,count($participantes));
+            for ($i=1;$i<=$premios;$i++)
+            {
+                $premiado = mt_rand(1,count($participantes));
     
-            if ($premiado == 0)
-            {
-                echo "<p>Lo siento el premio ".$i." queda vacante.</p><br>";
-            }else
-            {
-                echo "El premio ".$i." es para: ".$participantes[$premiado]."<br>";
+                if ($premiado == 0)
+                {
+                    echo "<p>Lo siento el premio ".$i." queda vacante.</p><br>";
+                }else
+                {
+                    echo "El premio ".$i." es para: ".$participantes[$premiado]."<br>";
+                }
             }
+
+        }else
+        
+    }
+
+    function ValidarPremios($premios,$personas)
+    {
+        if ($premios<=$personas)
+        {
+            $correcto = true;
         }
+        if ($premios>0)
+        {
+            $correcto = true;
+        }
+
     }
     ?>
 
