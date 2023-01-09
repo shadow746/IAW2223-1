@@ -63,12 +63,13 @@ if(isset($_POST["submit"])) {
         echo "Lo siento, tu archivo no se ha subido.";
 
     } else {//en caso contrario esta todo ok y sube el archivo
+        echo "<br>";
         if (move_uploaded_file($_FILES["FileToUpLoad"]["tmp_name"], $target_file)) {
-            echo "El archivo". htmlspecialchars( basename( $_FILES["FileToUpLoad"]["name"])). " se ha subido con exito.";
-            echo "<img width='20%' src='$target_file'>";
+            echo "El archivo ". htmlspecialchars( basename( $_FILES["FileToUpLoad"]["name"])). " se ha subido con exito.";
+            echo "<p><img width='20%' src='$target_file'></p>";
         } else {
             echo "Lo siento, ha ocurrido un error en la subida de tu archivo.";
-        }//PROBLEMA DE PERMISOS???? ES AQUI DONDE DA EL ERROR PQ????
+        }
     }
     
 }
