@@ -13,14 +13,14 @@
     <!--Nos aseguramos que el file_uploads = on 
 en el php.ini, para saber donde esta miramos el phpinfo() 	/etc/php/7.4/apache2 -->
 
-<form action="subir.php" method="post" enctype="multipart/form-data">
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" enctype="multipart/form-data">
   Select image to upload:
   <input type="file" name="FileToUpLoad" id="FileToUpLoad">
   <input type="submit" value="Subir Imagen" name="submit">
 </form>
 
 <?php
-$target_dir = "uploads/";//donde se ubica el archivo. Si no est en el servidor hay que crearla
+$target_dir = "uploads/";//donde se ubica el archivo. Si no esta en el servidor hay que crearla
 $target_file = $target_dir . basename($_FILES["FileToUpLoad"]["name"]);
 //ruta donde esta el archivo.
 $uploadOk = 1;//indica si la subida es correcta o no. De inicio partimos que es correcta
