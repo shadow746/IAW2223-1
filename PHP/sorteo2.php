@@ -16,11 +16,17 @@
         <input type="submit" name="submit" value="Sortear">
     </form>
     <?php
+    //NO FUNCIONA SI USAMOS ENTER DENTRO DEL TEXTAREA
+    //FUNCIONA PERFECTAMENTE SI SEPARAMOS CON ESPACIOS.
 
     if(isset($_POST["submit"])){
         
         $participantes = htmlspecialchars($_POST["participantes"]);
-        $premios = intval(htmlspecialchars($_POST["premios"]));
+        $participantes = explode(" ",$participantes);
+        //$participantes2 = explode(" ",$participantes);<?php echo strip_tags($participantes);
+        //parse_str($participantes);        
+        //$participantes2 = str_replace("<br />","<br>",$participantes);
+        //var_dump($participantes);
 
         echo "Los participantes son: ";
 
@@ -30,27 +36,20 @@
         }
 
         echo "<br>";
+        $premios = intval(htmlspecialchars($_POST["premios"]));
 
-        if (is_numeric($premios) && $premios>=1 && round($premios,0)==$premios)
+        for ($i=1;$i<=$premios;$i++)
         {
-            for ($i=1;$i<=$premios;$i++)
-            {
-                $premiado = mt_rand(1,count($participantes));
+            $premiado = mt_rand(1,count($participantes));
     
-                if ($premiado == 0)
-                {
-                    echo "<p>Lo siento el premio ".$i." queda vacante.</p><br>";
-                }else
-                {
-                    echo "El premio ".$i." es para: ".$participantes[$premiado]."<br>";
-                }
+            if ($premiado == 0)
+            {
+                echo "<p>Lo siento el premio ".$i." queda vacante.</p><br>";
+            }else
+            {
+                echo "El premio ".$i." es para: ".$participantes[$premiado]."<br>";
             }
-
-        }else
-        {
-            echo "Introduce un valor de premios valido";
         }
-        
     }
     ?>
 
