@@ -23,7 +23,7 @@
         
         $participantes = htmlspecialchars($_POST["participantes"]);
         $participantes = explode(" ",$participantes);
-        //$participantes2 = explode(" ",$participantes);<?php echo strip_tags($participantes);
+        //$participantes2 = explode("\n",$participantes);<?php echo strip_tags($participantes);
         //parse_str($participantes);        
         //$participantes2 = str_replace("<br />","<br>",$participantes);
         //var_dump($participantes);
