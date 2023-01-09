@@ -49,20 +49,10 @@
             }
 
         }else
+        {
+            echo "Introduce un valor de premios valido"
+        }
         
-    }
-
-    function ValidarPremios($premios,$personas)
-    {
-        if ($premios<=$personas)
-        {
-            $correcto = true;
-        }
-        if ($premios>0)
-        {
-            $correcto = true;
-        }
-
     }
     ?>
 
