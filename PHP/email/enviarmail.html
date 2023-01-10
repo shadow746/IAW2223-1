@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejemplo enviar mail con adjunto</title>
+</head>
+<body>
+    <form action="enviarmail.php" method="post">
+        <h3>Envíate un email con archivo adjunto</h3>
+        <table>
+            <tr>
+                <td>Email:</td>
+                <td><input type="text" name="email" value="<?=$_POST['email']?>"></td>
+                <td><input type="submit" name="recibir" value="Recibir email"/></td>
+            </tr>
+        </table>
+        </form>
+</body>
+</html>
