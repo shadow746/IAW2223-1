@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar mail con adjuntos</title>
+</head>
+<body>
+    <form id="formulario" action="enviar2.php" enctype="multipart/form-data" method="post" name="formulario">
+        <div>
+          <label>Nombre y Apellido</label>
+          <input id="nombre" name="nombre" required="" type="text" value="" />
+        </div><br>
+        <div>
+          <label>E-mail</label>
+          <input id="email" name="email" required="" type="email" value="" />
+        </div><br>
+        <div>
+          <label for="File">Desde aqui podra subir su archivo: </label>
+          <input id="my_file" name="my_file" type="file" />
+        </div><br>
+        <button class="btn btn-danger" type="submit">Enviar</button>
+      </form>
+</body>
+</html>
