@@ -12,7 +12,6 @@ if(!$enlace)
 }else
 {
     echo "Conexion con exito.<br>";
-    //mysqli_select_db($conexion,$db) or die ("Ninguna DB seleccionada");
     $query = "SELECT username FROM usuarios;";
     $resultado = mysqli_query($enlace,$query);
     
