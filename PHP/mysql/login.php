@@ -45,7 +45,7 @@ if (isset($_POST["submit"]))
         {
             $fila = mysqli_fetch_array ($resultado);
             //print_r($fila);
-            if ($fila ["username"]==$usu)
+            if (mysqli_num_rows($resultado)>0)
             {
                 echo "Bienvenido ". $fila["username"];
             }else

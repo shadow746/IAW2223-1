@@ -75,9 +75,9 @@ if (isset($_POST["submit"]))
                             echo "<br>";
                             echo $fila["username"];
                             
-                            if ($fila ["username"]==$nuevousu)
+                            if (mysqli_num_rows($resultado)>0)
                             {
-                                echo "Lo siento el usuario ".$fila["username"]." ya existe, elige otro";
+                                echo "Lo siento el usuario ".$fila["username"]." ya ha sido registrado";
                             }else
                             {
                                 //hago el insert
@@ -87,13 +87,34 @@ if (isset($_POST["submit"]))
                                 if ($resultadoinsert)
                                 {
                                     echo "Te has dado de alta correcctamente.";
+
+                                    //hasheo la contraseña 
+                                    $passh= md5(md5(mysqli_insert_id($enlace)).$nuevopass);
+                                    $id = mysqli_insert_id($enlace);
+
+                                    $query = sprintf("UPDATE usuarios SET password='%s' WHERE id='%s' LIMIT 1",$passh,$id);
+                                    mysqli_query($enlace,$query);
+
+                                     //ENVIAR CORREO DE ALTA
+                                     $asunto = "Has sido dado de alta";
+                                     $mensaje = "Hola ".$nuevonombre.", acabas de darte de alta en nuestro servicio de manera correcta ";
+                                     $cabecera = "From: Papichuli (rauldediego@iawraul.com)";
+                             
+                                     if (!filter_var($nuevomail, FILTER_VALIDATE_EMAIL)) 
+                                     {
+                                         echo "No se ha podido enviar el mail de confimacion";
+                                     }else
+                                     {
+                                         mail($nuevomail,$asunto,$mensaje,$cabecera);
+                                         echo "Te hemos enviado un mail confirmando el alta";
+                                     }  
                             
                                 }else
                                 {
                                     echo "Lo siento, ha ocurrido un error en el proceso de alta<br>" . mysqli_error($enlace);
                                 } 
                             }
-                            //FALTA ENVIAR CORREO
+                           
                         }    
                         mysqli_close($enlace); 
                     }
