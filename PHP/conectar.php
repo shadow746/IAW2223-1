@@ -11,15 +11,19 @@ if(!$enlace)
     echo "Conexion fallida: ".mysqli_connect_error();
 }else
 {
-    echo "Conexion con exito.";
-    $query = "SELECT * FROM usuarios where username='rauldedie'";
+    echo "Conexion con exito.<br>";
+    //mysqli_select_db($conexion,$db) or die ("Ninguna DB seleccionada");
+    $query = "SELECT username FROM usuarios;";
     $resultado = mysqli_query($enlace,$query);
-    if($resultado)
+    
+    //echo "<b>Usuario    </b> <b>Contraseña</b><br>";
+    while($resultado)
     {
-        $fila = mysqli_fecth_array ($resultado);
-        print_r($fila);
-        print ($fila);
+        $fila = mysqli_fetch_array ($resultado);
+        echo "$fila[username]   $fila[password]<br>";
+        $cont=$cont+1;
     }
+    echo "En total tengo: ".$cont." eltos";
     mysqli_close($enlace);
 }
 
