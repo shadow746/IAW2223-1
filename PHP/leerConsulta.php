@@ -12,10 +12,9 @@ if(!$enlace)
 }else
 {
     echo "Conexion con exito.<br>";
-    $query = "SELECT username FROM usuarios;";
+    $query = "SELECT * FROM usuarios;";
     $resultado = mysqli_query($enlace,$query);
-    
-    //echo "<b>Usuario    </b> <b>Contraseña</b><br>";
+    echo "<b>Usuario    </b> <b>Contraseña</b><br>";
     while($resultado)
     {
         $fila = mysqli_fetch_array ($resultado);
