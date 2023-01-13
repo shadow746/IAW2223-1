@@ -7,16 +7,16 @@
     <title>Formuario alta de usuario</title>
 </head>
 <body>
+    <H1>ALTA NUEVO USUARIO</H1>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
     <label for="usuario">Dime nombre de usuario</label>
     <input type="text" name="usuario"><br><br>
     <label for="passwd">Dime la contraseña</label>
     <input type="password" name="passwd"><br><br>
-    <input type="submit" name="submit">Dame de alta</input><br><br>
+    <label for="submit">Pincha en Enviar </label>
+    <input type="submit" name="submit"><br><br>
 </form>  
 <?php
-/*NO SE SI LA FUNCION MSQLI_QUERY AVISA SI EL USUARIO EXISTE
-IMAGINO QUE SI PERO COMO NO SE COMO LO HACE VEO A VER SI PUEDO CONTROLARLO YO*/
 
 if (isset($_POST["submit"]))
 {
@@ -33,31 +33,24 @@ if (isset($_POST["submit"]))
 
     }else
     {
+        //HABRIA QUE CONTROLAR LA ENTRADA 
         $nuevousu = htmlspecialchars($_POST["usuario"]);
         $nuevopass = htmlspecialchars($_POST["passwd"]);
         
-        $query = "SELECT username FROM usuarios where username=$nuevousu;";
-        $repetido = mysqli_query($enlace,$query);
-
-        if ($repetido==$nuevousu)
+        $query = "insert into usuarios (id,username,password) values ('','".$nuevousu."','".$nuevopass."');";
+        $resultado = mysqli_query($enlace,$query);
+        if ($resultado)
         {
-            echo "Lo siento el usuario ya existe";
+            echo "Te has dado de alta correcctamente.";
+    
         }else
         {
-            $query = "insert into usuarios (id,username,password) values ('','".$nuevousu."','".$nuevopass."');";
-            $resultado = mysqli_query($enlace,$query);
-            if ($resultado)
-            {
-                echo "Te has dado de alta correcctamente.";
-    
-            }else
-            {
-                echo "Lo siento, ha ocurrido un error en el proceso de alta<br>" . mysqli_error($enlace);
-            }         
-        }
-        mysqli_close($enlace);
-
+            echo "Lo siento, ha ocurrido un error en el proceso de alta<br>" . mysqli_error($enlace);
+        }         
     }
+    mysqli_close($enlace);
+
+    
 }
 
 
