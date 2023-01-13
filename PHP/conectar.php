@@ -12,8 +12,8 @@ if(!$enlace)
 }else
 {
     echo "Conexion con exito.";
-    $squery = "SELECT * FROM usuarios where username='rauldedie'";
-    $resultado = mysqli_query($enlace.$query);
+    $query = "SELECT * FROM usuarios where username='rauldedie'";
+    $resultado = mysqli_query($enlace,$query);
     if($resultado)
     {
         $fila = mysqli_fecth_array ($resultado);
