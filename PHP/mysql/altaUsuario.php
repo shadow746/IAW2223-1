@@ -17,7 +17,7 @@
     <input type="submit" name="submit"><br><br>
 </form>  
 <?php
-
+header("content-type:text/html;charset=utf-8");
 if (isset($_POST["submit"]))
 {
     $servidor="sdb-53.hosting.stackcp.net";
@@ -46,9 +46,10 @@ if (isset($_POST["submit"]))
         }else
         {
             echo "Lo siento, ha ocurrido un error en el proceso de alta<br>" . mysqli_error($enlace);
-        }         
+        }    
+        mysqli_close($enlace);     
     }
-    mysqli_close($enlace);
+    
 
     
 }

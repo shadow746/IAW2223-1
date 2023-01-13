@@ -1,4 +1,6 @@
 <?php
+header("content-type:text/html;charset=utf-8");
+
 $servidor="sdb-53.hosting.stackcp.net";
 $usuario="rauldedie";
 $password="lince123";
