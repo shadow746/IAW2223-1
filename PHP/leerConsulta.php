@@ -19,9 +19,7 @@ if(!$enlace)
     {
         $fila = mysqli_fetch_array ($resultado);
         echo "$fila[username]   $fila[password]<br>";
-        $cont=$cont+1;
     }
-    echo "En total tengo: ".$cont." eltos";
     mysqli_close($enlace);
 }
 
