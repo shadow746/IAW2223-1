@@ -34,8 +34,8 @@ if (isset($_POST["submit"]))
     }else
     {
         //HABRIA QUE CONTROLAR LA ENTRADA 
-        $nuevousu = htmlspecialchars($_POST["usuario"]);
-        $nuevopass = htmlspecialchars($_POST["passwd"]);
+        $nuevousu = mysqli_real_escape_string($enlace,$_POST["usuario"]);
+        $nuevopass = mysqli_real_escape_string($enlace,$_POST["passwd"]);
         
         $query = "insert into usuarios (id,username,password) values ('','".$nuevousu."','".$nuevopass."');";
         $resultado = mysqli_query($enlace,$query);

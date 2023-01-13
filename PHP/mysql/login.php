@@ -33,25 +33,29 @@ if (isset($_POST["submit"]))
     }else
     {
         //HABRIA QUE CONTROLAR LA ENTRADA 
-        $usu = htmlspecialchars($_POST["usuario"]);
-        $pass = htmlspecialchars($_POST["passwd"]);
+        $usu = mysqli_real_escape_string($enlace,$_POST["usuario"]);
+        $pass = mysqli_real_escape_string($enlace,$_POST["passwd"]);
         
-        $query = "SELECT username FROM usuarios WHERE username=$usu AND  password=$pass";
-        
+        $query = sprintf("SELECT * FROM usuarios WHERE username='%s' AND password='%s'",$usu,$pass);
         $resultado = mysqli_query($enlace,$query);
-        if ($fila == mysqli_fetch_array ($resultado))
+
+        //print_r($resultado);
+
+        if ($resultado)
         {
-            echo "Bienvenido $fila.";
-    
-        }else
-        {
-            echo "Lo siento, no eres usuario registrado<br>" . mysqli_error($enlace);
+            $fila = mysqli_fetch_array ($resultado);
+            //print_r($fila);
+            if ($fila ["username"]==$usu)
+            {
+                echo "Bienvenido ". $fila["username"];
+            }else
+            {
+                echo "Lo siento, no eres usuario registrado<br>" . mysqli_error($enlace);
+            }
+            
         }    
         mysqli_close($enlace);     
     }
-    
-
-    
 }
 
 
