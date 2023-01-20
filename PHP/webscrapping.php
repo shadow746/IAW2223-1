@@ -1,23 +1,34 @@
 <?php
+<form method="post">
+<input type="text" name="url" size="65" value="<?php echo $the_url;  ?>"/><br />
 
-$data = file_get_contents("https://www.marca.com");
-if ( preg_match("/<a href='mailto:'>"."</a>/i" , $data , $cap ) )
-//<a href="mailto:ejmplo@ejmplo.com">Enviar mail</a>
-{
-    echo "Resultado".$cap[1];
+<input type="submit" value="Show Emails" />
+</form> 
+<?php
+$the_url = isset($_REQUEST['url']) ? htmlspecialchars($_REQUEST['url']) : '';
+ 
+if (isset($_REQUEST['url']) && !empty($_REQUEST['url'])) {
+  // fetch data from specified url
+  $text = file_get_contents($_REQUEST['url']);
 }
-
-$dom = new DOMDocument();
-@$dom->loadHTML($data);
-
-$mails = $dom->getElementsByTagName( 'a' );
-
-foreach( $mails as $mail ){
-    //si encontramos href nos qudamos con su valor
-    if( $mail->getAttribute( 'href' ) === 'mailto' ){
-        $correo = $mail->nodeValue;
+ 
+// parse emails
+if (!empty($text)) {
+  $res = preg_match_all(
+    "/[a-z0-9]+([_\\.-][a-z0-9]+)*@([a-z0-9]+([\.-][a-z0-9]+)*)+\\.[a-z]{2,}/i",
+    $text,
+    $matches
+  );
+ 
+  if ($res) {
+    foreach(array_unique($matches[0]) as $email) {
+      echo $email . "<br />";
     }
   }
-echo "resultado: ".$correo."<br>";
+  else {
+    echo "No emails found.";
+  }
+}
+
 ?>
 
