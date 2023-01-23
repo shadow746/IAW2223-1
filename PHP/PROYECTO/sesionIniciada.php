@@ -37,7 +37,8 @@ include ("header.php");
     ELIMINAR BORRA LA AVERIA ELIMINANDOLA DE LA TABLA
     MODIFICAR MODIFICA FECHA_REVISION, COMENTARIO Y DESCRIPCION EL RESTO NO SE PUEDE MODIFICAR
     RESOLVER PONE FECHA DE RESOLUCION A LA AVERIA
-    DEBE APARECER UN FORMULARIO DE NUEVA AVERIA
+    DEBE APARECER UN FORMULARIO DE NUEVA AVERIA-ISERT INTO
+    ALMACENAR LOS ID DE LAS AVERIAS PARA SABER CUAL MODIFICAR/ELIMINAR SE HARA UPDATE O DELETE
 
 
 echo '<table border="0" cellspacing="2" cellpadding="2"> 
@@ -51,7 +52,8 @@ echo '<table border="0" cellspacing="2" cellpadding="2">
           <td> <font face="Arial">Comentario</font> </td>  
       </tr>';
 
-    while ($row = $result->fetch_assoc()) {
+    while ($fila=mysqli_fetch_array($resultado))
+    {
         $field1name = $row["col1"];
         $field2name = $row["col2"];
         $field3name = $row["col3"];
@@ -66,7 +68,6 @@ echo '<table border="0" cellspacing="2" cellpadding="2">
                   <td>'.$field5name.'</td> 
               </tr>';
     }
-    $result->free();
 } 
 ?>
 </body>
